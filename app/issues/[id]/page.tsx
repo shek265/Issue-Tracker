@@ -1,4 +1,6 @@
+import IssueStatusBadge from '@/app/Components/Bagde/IssueStatusBadge';
 import prisma from '@/prisma/client';
+import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
 
 
@@ -18,10 +20,13 @@ if(!issue) notFound();
 
   return (
     <div>
-        <p>{issue?.id}</p>
-        <p>{issue?.title}</p>
-        <p>{issue?.description}</p>
-        <p>{issue?.CreatedAt.toISOString()}</p>
+        <Heading>{issue?.title}</Heading>
+        <Flex gap='3' my='2'>
+        <IssueStatusBadge status={issue.status}/>
+        <Text>{issue?.CreatedAt.toDateString()}</Text>
+        </Flex>
+        <Card>{issue?.description}</Card>
+
     </div>
   )
 }
