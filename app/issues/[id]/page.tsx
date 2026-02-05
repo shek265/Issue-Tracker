@@ -2,6 +2,7 @@ import IssueStatusBadge from '@/app/Components/Bagde/IssueStatusBadge';
 import prisma from '@/prisma/client';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 
 
 interface Props{
@@ -25,7 +26,9 @@ if(!issue) notFound();
         <IssueStatusBadge status={issue.status}/>
         <Text>{issue?.CreatedAt.toDateString()}</Text>
         </Flex>
-        <Card>{issue?.description}</Card>
+        <Card variant='surface' className='prose p-6' mt='4'>
+            <ReactMarkdown >{issue?.description}</ReactMarkdown>
+        </Card>
 
     </div>
   )
